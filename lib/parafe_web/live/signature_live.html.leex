@@ -3,12 +3,18 @@
     <div class="section-title">Input</div>
     <br>
     <%= f = form_for @input_params, "#", phx_change: :validate, phx_submit: :sign %>
-      <%= label f, :method %>
-      <%= select f, :method, @http_methods %>
+      <div class="row">
+        <div class="column column-10">
+          <%= label f, :method %>
+          <%= select f, :method, @http_methods %>
+        </div>
 
-      <%= label f, :url, "URL" %>
-      <%= text_input f, :url, phx_debounce: 1000 %>
-      <%= error_tag f, :url %>
+        <div class="column column-80 column-offset-10">
+          <%= label f, :url, "URL" %>
+          <%= text_input f, :url, phx_debounce: 1000 %>
+          <%= error_tag f, :url %>
+        </div>
+      </div>
 
       <%= label f, :payload, "JSON Payload" %>
       <%= textarea f, :payload, rows: 20 %>
