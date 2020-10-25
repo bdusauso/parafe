@@ -28,7 +28,7 @@
       <%= text_input f, :key_id %>
       <%= error_tag f, :key_id %>
 
-      <%= submit "Sign", disabled: !@input_params.valid? %>
+      <%= submit "Sign", disabled: !@input_params.valid? || !@input_params.action %>
     </form>
   </div>    
 </section>
