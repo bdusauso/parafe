@@ -2,7 +2,6 @@ defmodule ParafeWeb.SignatureLive do
   use ParafeWeb, :live_view
   alias Parafe.{Parameters, Signature, Signatures}
   import Ecto.Changeset
-  require Logger
 
   @impl true
   def mount(_params, _session, socket) do
@@ -16,8 +15,6 @@ defmodule ParafeWeb.SignatureLive do
 
   @impl true
   def handle_event("sign", %{"parameters" => params}, socket) do
-    Logger.info("Signing ...")
-
     signature =
       params
       |> Parameters.changeset()
@@ -28,8 +25,6 @@ defmodule ParafeWeb.SignatureLive do
 
   @impl true
   def handle_event("validate", %{"parameters" => params}, socket) do
-    Logger.info("Validating ...")
-
     params =
       params
       |> Parameters.changeset()
