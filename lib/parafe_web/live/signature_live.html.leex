@@ -1,0 +1,49 @@
+<section>
+  <div class="container">
+    <div class="section-title">Input</div>
+    <br>
+    <%= f = form_for @input_params, "#", phx_change: :validate, phx_submit: :sign %>
+      <%= label f, :method %>
+      <%= select f, :method, @http_methods %>
+
+      <%= label f, :url, "URL" %>
+      <%= text_input f, :url, phx_debounce: 1000 %>
+      <%= error_tag f, :url %>
+
+      <%= label f, :payload, "JSON Payload" %>
+      <%= textarea f, :payload, rows: 20 %>
+      <%= error_tag f, :payload %>
+
+      <%= label f, :private_key, "Private Key (PEM encoded)" %>
+      <%= textarea f, :private_key, rows: 30 %>
+      <%= error_tag f, :private_key %>
+
+      <%= label f, :key_id, "Key Id" %>
+      <%= text_input f, :key_id %>
+      <%= error_tag f, :key_id %>
+
+      <!--
+      <%= label f, :headers, "Headers (one per line)" %>
+      <%= textarea f, :headers, rows: 30, phx_debounce: 1000 %>
+      <%= error_tag f, :headers %>
+      -->
+      <%= submit "Sign", disabled: !@input_params.valid? %>
+    </form>
+  </div>    
+</section>
+<section>
+  <div class="container">
+    <div class="section-title">Result</div>
+    <br>
+  
+    <label>Digest</label>
+    <textarea name="Digest" rows="10" disabled="true">
+      <%= @signature.digest %>
+    </textarea>
+  
+    <label>Signature String</label>
+    <textarea name="signature_string" rows="10" disabled="true">
+      <%= @signature.signature_string %>
+    </textarea>
+  </div>
+</section>
