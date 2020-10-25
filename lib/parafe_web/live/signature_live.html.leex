@@ -37,13 +37,15 @@
     <br>
   
     <label>Digest</label>
-    <textarea name="Digest" rows="10" disabled="true">
-      <%= @signature.digest %>
+    <textarea class="result digest" disabled="true">
+      <%= @signature.digest %>  
     </textarea>
+
+    <br>
   
     <label>Signature String</label>
-    <textarea name="signature_string" rows="10" disabled="true">
-      <%= @signature.signature_string %>
+    <textarea class="result signature" disabled="true">
+      <%= @signature.signature_string %>  
     </textarea>
   </div>
 </section>
