@@ -28,11 +28,6 @@
       <%= text_input f, :key_id %>
       <%= error_tag f, :key_id %>
 
-      <!--
-      <%= label f, :headers, "Headers (one per line)" %>
-      <%= textarea f, :headers, rows: 30, phx_debounce: 1000 %>
-      <%= error_tag f, :headers %>
-      -->
       <%= submit "Sign", disabled: !@input_params.valid? %>
     </form>
   </div>    
