@@ -70,12 +70,6 @@ defmodule Parafe.Parameters do
     )
   end
 
-  # defp split_headers(changeset) do
-  #   changeset
-  #   |> get_field(:headers)
-  #   |> String.split("\n")
-  # end
-
   defp validate_headers(changeset) do
     validate_change(
       changeset,
