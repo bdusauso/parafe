@@ -23,6 +23,10 @@
       <%= label f, :private_key, "Private Key (PEM encoded)" %>
       <%= textarea f, :private_key, rows: 30 %>
       <%= error_tag f, :private_key %>
+      <button type="button" 
+              phx-click="generate_private_key">
+        Generate
+      </button>
 
       <%= label f, :key_id, "Key Id" %>
       <%= text_input f, :key_id %>

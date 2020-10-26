@@ -16,9 +16,22 @@ defmodule Parafe.Parameters do
     field :headers, {:array, :string}
   end
 
-  def changeset(parameters) do
-    %__MODULE__{}
-    |> cast(parameters, @cast_fields)
+  def changeset(parameters, attrs \\ %{}) do
+    parameters
+    |> cast(attrs, @cast_fields)
+    |> validate_all()
+  end
+
+  def set_private_key(parameters, private_key) do
+    parameters
+    |> apply_changes()
+    |> changeset(%{private_key: private_key})
+  end
+
+  def http_methods, do: @http_methods
+
+  defp validate_all(changeset) do
+    changeset
     |> validate_required(@required_fields)
     |> validate_inclusion(:method, @http_methods)
     |> validate_private_key()
@@ -26,8 +39,6 @@ defmodule Parafe.Parameters do
     |> validate_url()
     |> validate_headers()
   end
-
-  def http_methods, do: @http_methods
 
   defp validate_payload(changeset) do
     validate_change(
