@@ -88,6 +88,7 @@ defmodule ParafeWeb do
       import Phoenix.View
 
       import ParafeWeb.ErrorHelpers
+      import ParafeWeb.ParameterHelpers
       import ParafeWeb.Gettext
       alias ParafeWeb.Router.Helpers, as: Routes
     end

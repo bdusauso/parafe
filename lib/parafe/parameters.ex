@@ -27,6 +27,8 @@ defmodule Parafe.Parameters do
     |> validate_headers()
   end
 
+  def http_methods, do: @http_methods
+
   defp validate_payload(changeset) do
     validate_change(
       changeset,
