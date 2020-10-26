@@ -2,6 +2,7 @@ defmodule Parafe.Parameters do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @http_methods ~w(GET POST PATCH)
   @cast_fields ~w(method url payload private_key key_id)a
   @required_fields @cast_fields
 
@@ -19,6 +20,7 @@ defmodule Parafe.Parameters do
     %__MODULE__{}
     |> cast(parameters, @cast_fields)
     |> validate_required(@required_fields)
+    |> validate_inclusion(:method, @http_methods)
     |> validate_private_key()
     |> validate_payload()
     |> validate_url()
