@@ -19,7 +19,6 @@ defmodule ParafeWeb.Router do
 
     live "/", PageLive, :index
     live "/sign", SignatureLive
-    live "/verify", VerificationLive
   end
 
   # Other scopes may use custom stacks.
