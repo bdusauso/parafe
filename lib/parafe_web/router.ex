@@ -17,8 +17,7 @@ defmodule ParafeWeb.Router do
   scope "/", ParafeWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
-    live "/sign", SignatureLive
+    live "/", SignatureLive
   end
 
   # Other scopes may use custom stacks.
