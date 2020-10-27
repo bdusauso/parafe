@@ -18,11 +18,38 @@ import NProgress from "nprogress"
 import {LiveSocket} from "phoenix_live_view"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
 
 // Show progress bar on live navigation and form submits
 window.addEventListener("phx:page-loading-start", info => NProgress.start())
 window.addEventListener("phx:page-loading-stop", info => NProgress.done())
+
+let Hooks = {}
+Hooks.GenerateKey = {
+  mounted() {
+    this.el.addEventListener("click", e => {
+      window.crypto.subtle.generateKey(
+        {
+          name: "RSA-PSS",
+          modulusLength: 4096,
+          publicExponent: new Uint8Array([1, 0, 1]),
+          hash: "SHA-256"
+        },
+        true,
+        ["encrypt", "decrypt", "sign", "verify"]
+      ).then(keyPair => {
+        let elem = document.getElementById("private-key-textarea")
+        elem.textContent = keyPair
+        elem.dispatchEvent(new Event('input', {bubbles: true, cancelable: true}))        
+      })
+    })
+  }
+}
+
+let liveSocket = new LiveSocket(
+  "/live", 
+  Socket, 
+  {params: {_csrf_token: csrfToken}, hooks: Hooks}
+)
 
 // connect if there are any LiveViews on the page
 liveSocket.connect()
@@ -32,4 +59,3 @@ liveSocket.connect()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
-
