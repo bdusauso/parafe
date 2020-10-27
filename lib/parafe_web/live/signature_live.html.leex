@@ -2,7 +2,10 @@
   <div class="container">
     <div class="section-title">Input</div>
     <br>
-    <%= f = form_for @input_params, "#", phx_change: :validate, phx_submit: :sign %>
+    <%= f = form_for @input_params, "#", 
+            autocomplete: "off", 
+            phx_change: :validate, 
+            phx_submit: :sign %>
       <div class="row">
         <div class="column column-10">
           <%= label f, :method %>
