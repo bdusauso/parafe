@@ -14,7 +14,7 @@
 
         <div class="column column-80 column-offset-10">
           <%= label f, :url, "URL" %>
-          <%= text_input f, :url, phx_debounce: 1000 %>
+          <%= text_input f, :url, phx_debounce: 250 %>
           <%= error_tag f, :url %>
         </div>
       </div>
