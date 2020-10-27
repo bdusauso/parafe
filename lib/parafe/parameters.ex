@@ -20,6 +20,7 @@ defmodule Parafe.Parameters do
     parameters
     |> cast(attrs, @cast_fields)
     |> validate_all()
+    |> Map.put(:action, :insert)
   end
 
   def set_private_key(parameters, private_key) do

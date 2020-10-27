@@ -28,11 +28,9 @@ defmodule ParafeWeb.SignatureLive do
 
   @impl true
   def handle_event("validate", %{"parameters" => params}, socket) do
-    params =
-      %Parameters{}
-      |> Parameters.changeset(params)
-      |> Map.put(:action, :insert)
     Logger.info("Validate input parameters")
+
+    params = Parameters.changeset(%Parameters{}, params)
 
     {:noreply, assign(socket, input_params: params, enable_submit: params.valid?)}
   end
