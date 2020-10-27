@@ -1,6 +1,6 @@
 defmodule ParafeWeb.SignatureLive do
   use ParafeWeb, :live_view
-  alias Parafe.{Crypto, Parameters, Signature, Signatures}
+  alias Parafe.{Parameters, Signature, Signatures}
   require Logger
 
   @impl true
@@ -33,15 +33,5 @@ defmodule ParafeWeb.SignatureLive do
     params = Parameters.changeset(%Parameters{}, params)
 
     {:noreply, assign(socket, input_params: params, enable_submit: params.valid?)}
-  end
-
-  @impl true
-  def handle_event("generate_private_key", _, socket) do
-    Logger.info("Generate private key")
-
-    key = Crypto.generate_private_key()
-    socket = update(socket, :input_params, &Parameters.set_private_key(&1, key))
-
-    {:noreply, socket}
   end
 end
